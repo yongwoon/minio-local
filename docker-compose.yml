@@ -15,12 +15,13 @@ services:
     image: minio/mc
     depends_on:
       - minio
+    tty: true
     entrypoint: >
       /bin/sh -c "
       until (/usr/bin/mc config host add myminio http://minio:9000 minio_access_key minio_secret_key) do echo '...waiting...' && sleep 1; done;
       /usr/bin/mc mb myminio/mybucket --region=ap-northeast-1;
       /usr/bin/mc policy download myminio/mybucket;
-      exit 0;
+      /bin/sh
       "
 volumes:
   minio_volume:
