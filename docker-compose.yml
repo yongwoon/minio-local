@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  minio:
+    image: minio/minio
+    volumes:
+      - minio_volume:/export
+    ports:
+      - "9900:9000"
+    environment:
+      MINIO_ACCESS_KEY: hogeaccess
+      MINIO_SECRET_KEY: hogesecret
+    command: server /export
+
+volumes:
+  minio_volume:
